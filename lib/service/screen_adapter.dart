@@ -21,4 +21,10 @@ class ScreenAdapter {
     return ScreenUtil().setWidth(value);
   }
 
+  // 屏幕高度
+  static scrrenHeight() => ScreenUtil().screenHeight;
+
+  // 屏幕的宽度
+  static screenWidth() => ScreenUtil().screenWidth;
+
 }
