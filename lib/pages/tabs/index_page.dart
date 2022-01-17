@@ -45,6 +45,64 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  _recProductItemWidget() {
+    var itemWidth = (ScreenAdapter.screenWidth()-30) / 2;
+    return Container(
+      padding: const EdgeInsets.all(5),
+      width: itemWidth,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black12,
+          width: 1
+        )
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.network(
+                "https://www.itying.com/images/flutter/list1.jpg",
+                fit: BoxFit.fill,),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(ScreenAdapter.height(20)),
+            child: const Text(
+              "2021女装男士同款大大码中长款大富大贵很好很强大的衣服路过走过不要错过",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.black54),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: ScreenAdapter.height(20)),
+            child: Stack(
+              children: const [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "¥188.0",
+                    style: TextStyle(color: Colors.red, fontSize: 16),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text("¥198.0",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                          decoration: TextDecoration.lineThrough)),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _hotProductListWidget() {
     return Container(
       padding: EdgeInsets.all(ScreenAdapter.width(20)),
@@ -79,15 +137,26 @@ class HomePage extends StatelessWidget {
     return ListView(
       children: [
         _banner(),
-        SizedBox(
-          height: ScreenAdapter.height(10),
-        ),
+        SizedBox(height: ScreenAdapter.height(20),),
         _titleWidget("猜你喜欢"),
-        SizedBox(
-          height: ScreenAdapter.height(10),
-        ),
+        SizedBox(height: ScreenAdapter.height(20),),
+        _hotProductListWidget(),
         _titleWidget("热门推荐"),
-        _hotProductListWidget()
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: Wrap(
+            runSpacing: 10,
+            spacing: 10,
+            children: [
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget(),
+              _recProductItemWidget()
+            ],
+          ),
+        ),
       ],
     );
   }
