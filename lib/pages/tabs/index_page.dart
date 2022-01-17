@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:jdshop/service/screen_adapter.dart';
 
@@ -33,7 +32,6 @@ class HomePage extends StatelessWidget {
   Widget _titleWidget(string) {
     return Container(
       alignment: Alignment.centerLeft,
-      height: ScreenUtil().setHeight(20),
       margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
       padding: EdgeInsets.only(left: ScreenAdapter.width(20)),
       decoration: BoxDecoration(
@@ -43,6 +41,34 @@ class HomePage extends StatelessWidget {
       child: Text(
         string,
         style: const TextStyle(color: Colors.black54),
+      ),
+    );
+  }
+
+  Widget _hotProductListWidget() {
+    return Container(
+      padding: EdgeInsets.all(ScreenAdapter.width(20)),
+      height: ScreenAdapter.height(220),
+      width: double.infinity,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                height: ScreenAdapter.height(140),
+                width: ScreenAdapter.height(140),
+                margin: EdgeInsets.only(right: ScreenAdapter.width(20)),
+                child: Image.network(
+                  "https://www.itying.com/images/flutter/hot${index+1}.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Text("第${index+1}条")
+            ],
+          );
+        },
+        itemCount: 10,
       ),
     );
   }
@@ -61,6 +87,7 @@ class HomePage extends StatelessWidget {
           height: ScreenAdapter.height(10),
         ),
         _titleWidget("热门推荐"),
+        _hotProductListWidget()
       ],
     );
   }
