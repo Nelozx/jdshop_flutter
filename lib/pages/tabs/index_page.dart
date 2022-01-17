@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:jdshop/service/screen_adapter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,12 +34,11 @@ class HomePage extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       height: ScreenUtil().setHeight(20),
-      margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-      padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+      margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
+      padding: EdgeInsets.only(left: ScreenAdapter.width(20)),
       decoration: BoxDecoration(
         border: Border(
-            left: BorderSide(
-                color: Colors.red, width: ScreenUtil().setWidth(6))),
+            left: BorderSide(color: Colors.red, width: ScreenAdapter.width(6))),
       ),
       child: Text(
         string,
@@ -49,21 +49,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: const Size(375, 667),
-        orientation: Orientation.portrait);
+    ScreenAdapter.of(context);
     return ListView(
       children: [
         _banner(),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: ScreenAdapter.height(10),
         ),
         _titleWidget("猜你喜欢"),
-        const SizedBox(
-          height: 10,
+        SizedBox(
+          height: ScreenAdapter.height(10),
         ),
         _titleWidget("热门推荐"),
       ],
